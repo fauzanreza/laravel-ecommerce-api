@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\UserAuthenticationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,4 +29,5 @@ Route::prefix('v1')->group(function () {
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('logout', [UserAuthenticationController::class, 'logout']);
     Route::apiResource('products', ProductsController::class);
+    Route::apiResource('categories', CategoriesController::class);
 });
