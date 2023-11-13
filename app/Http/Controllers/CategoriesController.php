@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CategoryResource;
 use App\Models\Categories;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
     public function index()
     {
-        return CategoryResource::collection(Categories::all());
+        return CategoryResource::collection(Categories::paginate(5));
     }
 
     public function store(Request $request)

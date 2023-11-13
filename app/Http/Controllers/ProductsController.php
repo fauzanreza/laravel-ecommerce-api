@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ProductResource;
 use App\Models\Products;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
     public function index()
     {
-        return ProductResource::collection(Products::all());
+        return ProductResource::collection(Products::paginate(5));
     }
 
     public function store(Request $request)
