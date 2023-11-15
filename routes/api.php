@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\UserAuthenticationController;
 use App\Http\Controllers\CartsController;
+use App\Http\Controllers\CartItemsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,5 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('products', ProductsController::class);
     Route::apiResource('categories', CategoriesController::class);
     Route::apiResource('carts', CartsController::class);
+    Route::apiResource('cart_items', CartItemsController::class);
 });
