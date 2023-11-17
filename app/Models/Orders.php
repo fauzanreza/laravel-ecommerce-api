@@ -27,4 +27,8 @@ class Orders extends Model
     protected $casts = [
         'items' => 'array'
     ];
+    
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }
