@@ -20,19 +20,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//These routes are NOT protected using middleware
+######################### Public Route #########################
 
 Route::prefix('v1')->group(function () {
     Route::post('login', [UserAuthenticationController::class, 'login']);
     Route::post('register', [UserAuthenticationController::class, 'register']);
 });
 
-
-//These routes are protected using middleware
-Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
-    Route::post('logout', [UserAuthenticationController::class, 'logout']);
+Route::prefix('v1')->group(function () {
     Route::apiResource('products', ProductsController::class);
     Route::apiResource('categories', CategoriesController::class);
+});
+
+######################### Private Route #########################
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+    Route::post('logout', [UserAuthenticationController::class, 'logout']);
     Route::apiResource('carts', CartsController::class);
     Route::apiResource('cart_items', CartItemsController::class);
     Route::apiResource('orders', OrdersController::class);
