@@ -7,6 +7,7 @@ use App\Models\Products;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
 {
@@ -17,6 +18,18 @@ class ProductsController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'price' => 'required|integer',
+            'description' => 'required|string',
+            'stock' => 'required|integer',
+            'image_url' => 'required|array'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' =>
+            $validator->errors()], 400);
+        }
+
         $product_name = $request->input('name');
         $product_price = $request->input('price');
         $product_description = $request->input('description');
@@ -42,6 +55,18 @@ class ProductsController extends Controller
 
     public function update(Request $request, Products $product)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'price' => 'required|integer',
+            'description' => 'required|string',
+            'stock' => 'required|integer',
+            'image_url' => 'required|array'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' =>
+            $validator->errors()], 400);
+        }
+    
         $product_name = $request->input('name');
         $product_price = $request->input('price');
         $product_description = $request->input('description');
