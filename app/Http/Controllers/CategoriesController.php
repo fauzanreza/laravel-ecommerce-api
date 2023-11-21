@@ -7,6 +7,7 @@ use App\Models\Categories;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CategoriesController extends Controller
 {
@@ -17,6 +18,14 @@ class CategoriesController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'category_name' => 'required|string'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' =>
+            $validator->errors()], 400);
+        }
+        
         $category_name = $request->input('category_name');
 
         $category = Categories::create([
@@ -34,6 +43,14 @@ class CategoriesController extends Controller
 
     public function update(Request $request, Categories $category)
     {
+        $validator = Validator::make($request->all(), [
+            'category_name' => 'required|string'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' =>
+            $validator->errors()], 400);
+        }
+        
         $category_name = $request->input('category_name');
 
         $category->update([
