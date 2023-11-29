@@ -23,7 +23,7 @@ class ProductsController extends Controller
             'price' => 'required|integer',
             'description' => 'required|string',
             'stock' => 'required|integer',
-            'image_url' => 'required|array'
+            'image_url' => 'required|string'
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' =>
@@ -60,7 +60,7 @@ class ProductsController extends Controller
             'price' => 'required|integer',
             'description' => 'required|string',
             'stock' => 'required|integer',
-            'image_url' => 'required|array'
+            'image_url' => 'required|string'
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' =>
